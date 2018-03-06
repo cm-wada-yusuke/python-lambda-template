@@ -1,0 +1,7 @@
+.idea
+.pytest_cache
+bin
+deploy
+lib
+venv
+pyvenv.cfg
