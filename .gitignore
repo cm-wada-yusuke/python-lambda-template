@@ -5,3 +5,6 @@ deploy
 lib
 venv
 pyvenv.cfg
+pip-selfcheck.json
+__pycache__/
+*.pyc

@@ -2,4 +2,4 @@
 
 # enter your own environment values.
 
-DOCKER_NAME="heroes_default"
+DOCKER_NAME="pythonlambdatemplate_default"
