@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB) resource.
+Parameters:
+  Env:
+    Type: String
+    Default: stg
+  DynamoDBEndpoint:
+    Type: String
+    Default: https://dynamodb.ap-northeast-1.amazonaws.com/
+  HeroTableName:
+    Type: String
+    Default: CM-Heroes
+  BucketName:
+    Type: String
+    Default: hero-lambda-deploy
+  CodeKey:
+    Type: String
+    Default: api_backend/0000.zip
+Resources:
+  GetHeroes:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/functions/heroes/index.get
+      Runtime: python3.6
+      CodeUri:
+          Bucket: !Ref BucketName
+          Key: !Ref CodeKey
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
+          HERO_TABLE_NAME: !Ref HeroTableName
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /resource/{heroId}
+            Method: get
