@@ -14,7 +14,7 @@ phases:
     commands:
       - python -m venv .
       - . bin/activate
-      - pip install
+      - pip install -r requirments.txt
       - docker-compose up -d
   build:
     commands:
