@@ -7,6 +7,12 @@ env:
 phases:
   install:
     commands:
+      - npm install -g n
+      - n latest
+      - npm update -g npm
+      - npm install
+      - npm -g install aws-sam-local
+      - npm -g install node-jq
       - python -m venv .
       - . bin/activate
       - pip install --upgrade pip
