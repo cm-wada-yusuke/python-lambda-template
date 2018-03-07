@@ -7,10 +7,13 @@ env:
 phases:
   install:
     commands:
-      - npm install -g n
-      - n latest
+      - sudo apt-get install -y nodejs npm
+      - sudo npm cache clean
+      - sudo npm install -g n
+      - sudo n stable
+      - sudo ln -sf /usr/local/bin/node /usr/bin/node
+      - sudo apt-get purge -y nodejs npm
       - npm update -g npm
-      - npm install
       - npm -g install aws-sam-local
       - npm -g install node-jq
       - python -m venv .
