@@ -52,5 +52,5 @@
   "stageVariables": {
     "baz": "qux"
   },
-  "id": "1"
+  "id": "test-id"
 }

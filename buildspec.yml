@@ -9,7 +9,6 @@ phases:
     commands:
       - sudo apt-get update
       - sudo apt-get install zip
-      - alias md5='md5sum'
       - sudo curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && sudo chmod +x /usr/local/bin/jq
       - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       - sudo apt-get install -y nodejs
@@ -40,7 +39,5 @@ phases:
   post_build:
     commands:
       - ./deploy.sh
-#      - aws s3 sync dist s3://vote-uploader/site --delete # 1
-#      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths '/*' # 2
 
 
