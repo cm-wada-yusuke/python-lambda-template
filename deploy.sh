@@ -4,7 +4,7 @@ pip install -r requirements.txt -t deploy
 cp -R src deploy
 cd deploy
 zip -r api_backend.zip *
-hash=`md5 -q api_backend.zip`
+hash=`openssl md5 api_backend.zip | awk '{print $2}'`
 echo "api_backend.zip: hash = $hash"
 filename="${hash}.zip"
 s3_keyname="api_backend/${filename}"
