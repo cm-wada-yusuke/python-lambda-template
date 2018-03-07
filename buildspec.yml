@@ -15,8 +15,8 @@ phases:
       - sudo ln -sf /usr/local/bin/node /usr/bin/node
       - sudo apt-get purge -y nodejs
       - npm update -g npm
-      - npm -g install aws-sam-local
-      - npm -g install node-jq
+      - npm -g install --unsafe-perm aws-sam-local
+      - npm -g install --unsafe-perm node-jq
       - python -m venv .
       - . bin/activate
       - pip install --upgrade pip
