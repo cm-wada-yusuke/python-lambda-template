@@ -7,14 +7,13 @@ env:
 phases:
   install:
     commands:
-      - sudo apt-get install build-essential checkinstall
       - pip install --upgrade pip
       - pip install --upgrade awscli
       - curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
   pre_build:
     commands:
       - python -m venv .
-      - source bin/activate
+      - . bin/activate
       - pip install
       - docker-compose up -d
   build:
