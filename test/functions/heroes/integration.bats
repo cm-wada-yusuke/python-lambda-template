@@ -36,6 +36,6 @@ teardown() {
 }
 
 @test "DynamoDB PUT Funciton response code is 200" {
-    result=`sam local invoke --docker-network a27c0476cb8e -t template_heroes.yaml --event test/functions/heroes/examples/put_payload.json --env-vars environments/sam-local.json PutHeroes | jq '.ResponseMetadata.HTTPStatusCode'`
+    result=`sam local invoke --docker-network ${docker_network_id} -t template_heroes.yaml --event test/functions/heroes/examples/put_payload.json --env-vars environments/sam-local.json PutHeroes | jq '.ResponseMetadata.HTTPStatusCode'`
     [ $result -eq 200 ]
 }
