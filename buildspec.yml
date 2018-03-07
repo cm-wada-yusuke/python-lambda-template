@@ -24,6 +24,6 @@ phases:
     commands:
 #      - aws s3 sync dist s3://vote-uploader/site --delete # 1
 #      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths '/*' # 2
-      - deactivate
+      - bin/deactivate
 
 
