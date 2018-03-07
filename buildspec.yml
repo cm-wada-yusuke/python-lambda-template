@@ -7,18 +7,18 @@ env:
 phases:
   install:
     commands:
-      - pip3 install --upgrade pip3
-      - pip3 install --upgrade awscli
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
       - curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
   pre_build:
     commands:
-      - python3 -m venv .
+      - python -m venv .
       - source bin/activate
-      - pip3 install
+      - pip install
       - docker-compose up -d
   build:
     commands:
-      - python3 -m pytest
+      - python -m pytest
       - ./integration_test.sh
   post_build:
     commands:
