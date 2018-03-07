@@ -11,4 +11,4 @@ def test_epoc_by_second_precision():
     tdatetime = datetime.strptime(tstr, '%Y-%m-%d %H:%M:%S')
     sut = epoc_by_second_precision(tdatetime)
 
-    assert sut == decimal.Decimal('1356756577')
+    assert int(sut) == 1356756577
