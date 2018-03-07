@@ -3,6 +3,7 @@
 import boto3
 import datetime
 import uuid
+import json
 from builtins import Exception
 import os
 from src.functions.heroes.utils import *
@@ -23,14 +24,15 @@ DYNAMODB_TABLE = DYNAMO.Table(HERO_TABLE_NAME)
 
 def get(event, context):
     try:
-        # get DeviceSerialID
         hero_id = event['id']
 
-        response = DYNAMODB_TABLE.get_item(
+        dynamo_response = DYNAMODB_TABLE.get_item(
             Key={
                 'id': hero_id
             }
         )
+
+        response = json.dumps(dynamo_response['Item'], cls=DecimalEncoder, ensure_ascii=False)
 
         return response
 

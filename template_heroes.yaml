@@ -18,19 +18,6 @@ Parameters:
     Type: String
     Default: api_backend/0000.zip
 Resources:
-  CM-HeroesTable:
-   Type: AWS::DynamoDB::Table
-   Properties:
-     TableName: !Ref HeroTableName
-     AttributeDefinitions:
-       - AttributeName: id
-         AttributeType: S
-     KeySchema:
-       - AttributeName: id
-         KeyType: HASH
-     ProvisionedThroughput:
-       ReadCapacityUnits: 5
-       WriteCapacityUnits: 5
   GetHeroes:
     Type: AWS::Serverless::Function
     Properties:
@@ -45,12 +32,6 @@ Resources:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
           HERO_TABLE_NAME: !Ref HeroTableName
-      Events:
-        GetResource:
-          Type: Api
-          Properties:
-            Path: /heroes/{heroId}
-            Method: get
   PutHeroes:
     FunctionName: heroes-PutHeroes
     Type: AWS::Serverless::Function
@@ -65,9 +46,3 @@ Resources:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
           HERO_TABLE_NAME: !Ref HeroTableName
-      Events:
-        GetResource:
-          Type: Api
-          Properties:
-            Path: /heroes
-            Method: put
