@@ -53,7 +53,8 @@ def get(event, context):
             Item={
                 'id': '1',
                 'updated_at': updated_at,
-                'created_at': updated_at
+                'created_at': updated_at,
+                'modified_at': updated_at
             }
         )
 
