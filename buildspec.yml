@@ -7,6 +7,7 @@ env:
 phases:
   install:
     commands:
+      - sudo apt-get install jq
       - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       - sudo apt-get install -y nodejs
       - sudo npm cache clean --force
@@ -16,7 +17,6 @@ phases:
       - sudo apt-get purge -y nodejs
       - npm update -g npm
       - npm -g install --unsafe-perm aws-sam-local
-      - npm -g install --unsafe-perm node-jq
       - python -m venv .
       - . bin/activate
       - pip install --upgrade pip
