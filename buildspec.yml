@@ -7,7 +7,7 @@ env:
 phases:
   install:
     commands:
-      - sudo apt-get install jq
+      - sudo curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && sudo chmod +x /usr/local/bin/jq
       - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       - sudo apt-get install -y nodejs
       - sudo npm cache clean --force
