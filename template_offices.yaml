@@ -37,7 +37,7 @@ Resources:
   PutOffices:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-PutOffices
+      FunctionName: ${Env}-heroes-PutOffices
       Handler: src/functions/offices/index.put
       Runtime: python3.6
       CodeUri:
