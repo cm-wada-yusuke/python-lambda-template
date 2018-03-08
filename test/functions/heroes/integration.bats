@@ -11,7 +11,7 @@ teardown() {
     echo "teardown"
 }
 
-@test "DynamoDB Get Funciton response the correct item" {
+@test "DynamoDB Get Hero Function response the correct item" {
     data='{
         "id": {"S": "test-id"},
         "name": {"S": "Test-man"},
@@ -35,7 +35,7 @@ teardown() {
     [ `echo "${actual}" | jq .office` = `echo "${expected}" | jq .office.S` ]
 }
 
-@test "DynamoDB PUT Funciton response code is 200" {
+@test "DynamoDB PUT Hero Function response code is 200" {
     result=`sam local invoke --docker-network ${docker_network_id} -t template_heroes.yaml --event test/functions/heroes/examples/put_payload.json --env-vars environments/sam-local.json PutHeroes | jq '.ResponseMetadata.HTTPStatusCode'`
     [ $result -eq 200 ]
 }

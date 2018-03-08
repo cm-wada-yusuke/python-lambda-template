@@ -6,5 +6,13 @@
   "PutHeroes": {
     "DYNAMODB_ENDPOINT": "http://localstack:4569/",
     "HERO_TABLE_NAME": "CM-Heroes"
+  },
+  "GetOffices": {
+    "DYNAMODB_ENDPOINT": "http://localstack:4569/",
+    "OFFICE_TABLE_NAME": "CM-Offices"
+  },
+  "PutOffices": {
+    "DYNAMODB_ENDPOINT": "http://localstack:4569/",
+    "OFFICE_TABLE_NAME": "CM-Offices"
   }
 }

@@ -8,21 +8,21 @@ Parameters:
   DynamoDBEndpoint:
     Type: String
     Default: https://dynamodb.ap-northeast-1.amazonaws.com/
-  HeroTableName:
+  OfficeTableName:
     Type: String
-    Default: CM-Heroes
+    Default: CM-Offices
   BucketName:
     Type: String
     Default: hero-lambda-deploy
   CodeKey:
     Type: String
-    Default: heroes/0000.zip
+    Default: office/0000.zip
 Resources:
-  GetHeroes:
+  GetOffices:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-GetHeroes
-      Handler: src/functions/heroes/index.get
+      FunctionName: heroes-GetOffices
+      Handler: src/functions/offices/index.get
       Runtime: python3.6
       CodeUri:
           Bucket: !Ref BucketName
@@ -31,12 +31,12 @@ Resources:
       Environment:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          HERO_TABLE_NAME: !Ref HeroTableName
-  PutHeroes:
+          OFFICE_TABLE_NAME: !Ref OfficeTableName
+  PutOffices:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-PutHeroes
-      Handler: src/functions/heroes/index.put
+      FunctionName: heroes-PutOffices
+      Handler: src/functions/offices/index.put
       Runtime: python3.6
       CodeUri:
           Bucket: !Ref BucketName
@@ -45,4 +45,4 @@ Resources:
       Environment:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          HERO_TABLE_NAME: !Ref HeroTableName
+          OFFICE_TABLE_NAME: !Ref OfficeTableName
