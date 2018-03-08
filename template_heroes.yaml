@@ -4,7 +4,7 @@ Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB)
 Parameters:
   Env:
     Type: String
-    Default: stg
+    Default: local
   DynamoDBEndpoint:
     Type: String
     Default: https://dynamodb.ap-northeast-1.amazonaws.com/
@@ -21,7 +21,8 @@ Resources:
   GetHeroes:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-GetHeroes
+      FunctionName:
+        Fn::Sub: ${Env}-heroes-GetHeroes
       Handler: src/functions/heroes/index.get
       Runtime: python3.6
       CodeUri:
@@ -30,12 +31,15 @@ Resources:
       Policies: AmazonDynamoDBReadOnlyAccess
       Environment:
         Variables:
+          ENV: !Ref Env
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          HERO_TABLE_NAME: !Ref HeroTableName
+          HERO_TABLE_NAME:
+            Fn::Sub: ${Env}-${HeroTableName}
   PutHeroes:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-PutHeroes
+      FunctionName:
+        Fn::Sub: ${Env}-heroes-PutHeroes
       Handler: src/functions/heroes/index.put
       Runtime: python3.6
       CodeUri:
@@ -44,5 +48,8 @@ Resources:
       Policies: AmazonDynamoDBFullAccess
       Environment:
         Variables:
+          ENV: !Ref Env
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          HERO_TABLE_NAME: !Ref HeroTableName
+          HERO_TABLE_NAME:
+            Fn::Sub: ${Env}-${HeroTableName}
+

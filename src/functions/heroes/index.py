@@ -3,7 +3,6 @@
 import boto3
 import datetime
 import uuid
-import json
 from builtins import Exception
 import os
 from src.functions.heroes.utils import *

@@ -4,7 +4,7 @@ Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB)
 Parameters:
   Env:
     Type: String
-    Default: stg
+    Default: local
   DynamoDBEndpoint:
     Type: String
     Default: https://dynamodb.ap-northeast-1.amazonaws.com/
@@ -21,7 +21,8 @@ Resources:
   GetOffices:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: heroes-GetOffices
+      FunctionName:
+        Fn::Sub: ${Env}-heroes-GetOffices
       Handler: src/functions/offices/index.get
       Runtime: python3.6
       CodeUri:
@@ -31,7 +32,8 @@ Resources:
       Environment:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          OFFICE_TABLE_NAME: !Ref OfficeTableName
+          OFFICE_TABLE_NAME:
+            Fn::Sub: ${Env}-${OfficeTableName}
   PutOffices:
     Type: AWS::Serverless::Function
     Properties:
@@ -45,4 +47,5 @@ Resources:
       Environment:
         Variables:
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
-          OFFICE_TABLE_NAME: !Ref OfficeTableName
+          OFFICE_TABLE_NAME:
+            Fn::Sub: ${Env}-${OfficeTableName}

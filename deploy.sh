@@ -2,6 +2,11 @@
 
 . environments/common.sh
 
+if [ -z $ENV ]; then
+  echo "Set the environment name. Such as test, stg, and prd." 1>&2
+  exit 1
+fi
+
 pip install -r requirements.txt -t deploy
 cp -R src deploy
 cd deploy
@@ -27,9 +32,11 @@ for item in ${FUNCTION_GROUP[@]} ; do
 
     aws cloudformation deploy \
         --template-file packaged-${item}.yaml \
-        --stack-name ${item}-lambda  \
+        --stack-name ${ENV}-${item}-lambda  \
         --capabilities CAPABILITY_IAM \
-        --parameter-overrides CodeKey=${s3_keyname}
+        --parameter-overrides \
+            Env=${ENV} \
+            CodeKey=${s3_keyname}
 done
 
 cd ..

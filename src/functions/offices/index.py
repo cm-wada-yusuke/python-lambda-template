@@ -7,6 +7,7 @@ from builtins import Exception
 import os
 from src.functions.heroes.utils import *
 
+ENV = os.getenv('ENV')
 DYNAMODB_ENDPOINT = os.getenv('DYNAMODB_ENDPOINT')
 OFFICE_TABLE_NAME = os.getenv('OFFICE_TABLE_NAME')
 
@@ -19,6 +20,7 @@ DYNAMO = boto3.resource(
 )
 
 DYNAMODB_TABLE = DYNAMO.Table(OFFICE_TABLE_NAME)
+
 
 
 def get(event, context):
