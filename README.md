@@ -2,17 +2,17 @@ Python Lambda Template: A sample repository that develops Lambda Function
 ===
 
 Initialization
-- -
+---
 
-`` `bash
+```bash
 cd python-lambda-template
 python - m venv.
 source bin / activate.fish
 pip install -r requirements.txt
-`` `
+```
 
 Intellij Settings
-- -
+---
 
 1. Project Structures> Python> Create your SDK with your Python
 2. Add SDK classpath: `/ paty / to / python / lib / python 3.6`
@@ -20,15 +20,16 @@ Intellij Settings
 4. install requirements.txt on Intellij
 
 Unit Test
-- -
+---
+
 Using pytest.
 
-`` `bash
+```bash
 python -m pytest
-`` `
+```
 
 Integration Test
-- -
+---
 
 Using:
 
@@ -36,7 +37,7 @@ Using:
 * [LocalStack (Docker)] (https://hub.docker.com/r/localstack/localstack/)
 * [Bats - Bash Automated Testing System] (https://github.com/sstephenson/bats)
 
-`` `Bash
+```Bash
 # Startup LocalStack
 docker-compose up-d
 
@@ -46,16 +47,16 @@ sam local invoke \
 -t template_heroes.yaml \
 --event test / functions / heroes / examples / get_payload.json \
 - env ​​- vars environments / sam - local.json GetHeroes
-`` `
+```
 
 The test by Bats executes the above contents and compares the output.
 
-`` `Bash
+```Bash
 bats test / functions / heroes / integration.bats
-`` `
+```
 
 Deploy
-- -
+---
 
 Task:
 
@@ -66,18 +67,18 @@ Task:
 
 Before deploy, you should set your AccessKey for your AWS account.
 
-`` `bash
+```bash
 ./deploy.sh
-`` `
+```
 
 CI / CD on AWS CodeBuild
-- -
+---
 
 ### Create S3 bucket for deoloy.
 
-`` `Bash
+```Bash
 aws s3 mb s3: // hero-lambda-deploy --profile your-profile
-`` `
+```
 
 ### Create CodeBuild project and build.
 
