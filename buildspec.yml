@@ -39,5 +39,6 @@ phases:
   post_build:
     commands:
       - ./deploy.sh
+      - git log -n 1 --format=%h
 
 
