@@ -1,0 +1,4 @@
+# enter your own environment values.
+
+S3_BUCKET_URL := s3://hero-lambda-deploy
+DOCKER_NAME := pythonlambdatemplate_default

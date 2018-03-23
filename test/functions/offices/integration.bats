@@ -1,9 +1,8 @@
 #!/usr/bin/env bats
 
-. environments/common.sh
-
 setup() {
     echo "setup"
+    aws --endpoint-url=http://localhost:4569 dynamodb create-table --table-name CM-Offices --attribute-definitions AttributeName=id,AttributeType=S --key-schema AttributeName=id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 || true
     docker_network_id=`docker network ls -q -f NAME=$DOCKER_NAME`
 }
 

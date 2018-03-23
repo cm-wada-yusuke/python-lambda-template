@@ -1,6 +1,9 @@
 SHELL = /usr/bin/env bash -xeuo pipefail
 
-S3_BUCKET_URL := s3://hero-lambda-deploy
+include Makevars
+
+TEST_INTEG_TARGETS := $(shell find test -name '*.bats')
+
 GIT_COMMIT := $(shell git log -n 1 --format=%h)
 ZIP_FILE := $(GIT_COMMIT).zip
 UPLOAD_FILE := deploy/$(ZIP_FILE)
@@ -20,6 +23,14 @@ localstack-up:
 
 localstack-stop:
 	@docker-compose stop localstack
+
+test-unit:
+	python -m pytest
+
+test-integ: localstack-up
+	@echo $(TEST_INTEG_TARGETS)
+	@echo $(DOCKER_NAME)
+	@DOCKER_NAME=$(DOCKER_NAME) bats $(TEST_INTEG_TARGETS)
 
 clean:
 	-rm -rf deploy/
@@ -85,6 +96,8 @@ guard-%:
 .PHONY: \
 	localstack-up \
 	localstack-stop \
+	test-unit \
+	test-integ \
 	dist \
 	upload \
 	clean \
