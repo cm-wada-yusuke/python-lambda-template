@@ -42,6 +42,7 @@ clean:
 dist:
 	@pip install -r requirements.txt -t deploy
 	@cp -R src deploy
+	@find deploy -name \*.pyc -o -name \*.pyo -o -name __pycache__ --delete
 	@cd deploy && \
 	zip -r $(GIT_COMMIT).zip *
 
