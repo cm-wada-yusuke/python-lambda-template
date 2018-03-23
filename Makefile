@@ -14,9 +14,12 @@ UPLOAD_TASK := $(addprefix upload-, $(TARGETS))
 DEPLOY_TASK := $(addprefix deploy-, $(TARGETS))
 
 
-all: guard-env clean dist $(UPLOAD_TASK) $(DEPLOY_TASK)
+all: guard-env clean test-unit test-integ dist $(UPLOAD_TASK) $(DEPLOY_TASK)
 	@echo $(UPLOAD_TASK)
 	@echo $(DEPLOY_TASK)
+
+install:
+	@pip install -r requirements.txt
 
 localstack-up:
 	@docker-compose up -d localstack
@@ -94,6 +97,7 @@ guard-%:
 	fi
 
 .PHONY: \
+	install \
 	localstack-up \
 	localstack-stop \
 	test-unit \

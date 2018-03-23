@@ -30,15 +30,15 @@ phases:
       - cd ../
   pre_build:
     commands:
-      - pip install -r requirements.txt
-      - docker-compose up -d
+      - make install
+      - make localstack-up
   build:
     commands:
-      - python -m pytest
-      - ./integration_test.sh
+      - make test-unit
+      - make test-integ
   post_build:
     commands:
-      - ./deploy.sh
-      - git log -n 1 --format=%h
+      - make upload env=$ENV
+      - make deploy env=$ENV
 
 
