@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Application logger to CloudWatch Logs.
+Resources:
+  IotHeroesDispathcer:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: ${Env}-iot_heroes_dispatcher
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
+      Handler: handlers/dispatchers/iot_heroes_dispatcher.lambda_handler
+      Runtime: python3.6
+      CodeUri: src/functions
+      Environment:
+        Variables:
+          ENV: !Ref Env
+          PUT_HEROES_FUNCTION_NAME:
+            Fn::Sub: ${Env}-${PutHeroesFunctionName}
+          PUT_OFFICES_FUNCTION_NAME:
+            Fn::Sub: ${Env}-${PutOfficesFunctionName}
+          PUT_SPONSORS_FUNCTION_NAME:
+            Fn::Sub: ${Env}-${PutSponsorsFunctionName}
+

@@ -5,7 +5,7 @@ import datetime
 import uuid
 from builtins import Exception
 import os
-from src.functions.handlers.heroes.utils import *
+from core.utils import *
 
 ENV = os.getenv('ENV')
 DYNAMODB_ENDPOINT = os.getenv('DYNAMODB_ENDPOINT')
@@ -20,7 +20,6 @@ DYNAMO = boto3.resource(
 )
 
 DYNAMODB_TABLE = DYNAMO.Table(OFFICE_TABLE_NAME)
-
 
 
 def get(event, context):
@@ -39,6 +38,7 @@ def get(event, context):
 
     except Exception as error:
         raise error
+
 
 def put(event, context):
     try:

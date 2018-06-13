@@ -5,7 +5,7 @@ import datetime
 import uuid
 from builtins import Exception
 import os
-from src.functions.handlers.heroes.utils import *
+from core.utils import *
 
 ENV = os.getenv('ENV')
 DYNAMODB_ENDPOINT = os.getenv('DYNAMODB_ENDPOINT')

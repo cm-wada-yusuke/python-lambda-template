@@ -1,6 +1,6 @@
 """This is python3.6 program."""
 
-from src.functions.handlers.heroes.utils import *
+from core.utils import *
 
 
 def test_epoc_by_second_precision():
