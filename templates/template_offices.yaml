@@ -1,36 +1,20 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB) resource.
-Parameters:
-  Env:
-    Type: String
-    Default: local
-  DynamoDBEndpoint:
-    Type: String
-    Default: https://dynamodb.ap-northeast-1.amazonaws.com/
-  OfficeTableName:
-    Type: String
-    Default: CM-Offices
-  BucketName:
-    Type: String
-    Default: hero-lambda-deploy
-  CodeKey:
-    Type: String
-    Default: office/0000.zip
 Resources:
   GetOffices:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName:
-        Fn::Sub: ${Env}-heroes-GetOffices
-      Handler: src/functions/offices/index.get
+        Fn::Sub: ${Env}-${GetOfficesFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
+      Handler: src/functions/hadlers/offices/index.get
       Runtime: python3.6
-      CodeUri:
-          Bucket: !Ref BucketName
-          Key: !Ref CodeKey
-      Policies: AmazonDynamoDBReadOnlyAccess
+      CodeUri: src/functions
       Environment:
         Variables:
+          ENV: !Ref Env
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
           OFFICE_TABLE_NAME:
             Fn::Sub: ${Env}-${OfficeTableName}
@@ -38,15 +22,15 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName:
-        Fn::Sub: ${Env}-heroes-PutOffices
+        Fn::Sub: ${Env}-${PutOfficesFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
       Handler: src/functions/offices/index.put
       Runtime: python3.6
-      CodeUri:
-          Bucket: !Ref BucketName
-          Key: !Ref CodeKey
-      Policies: AmazonDynamoDBFullAccess
+      CodeUri: src/functions
       Environment:
         Variables:
+          ENV: !Ref Env
           DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
           OFFICE_TABLE_NAME:
             Fn::Sub: ${Env}-${OfficeTableName}

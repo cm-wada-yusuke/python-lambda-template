@@ -1,0 +1,43 @@
+Parameters:
+  Env:
+    Type: String
+    Default: local
+  DynamoDBEndpoint:
+    Type: String
+    Default: https://dynamodb.ap-northeast-1.amazonaws.com/
+  HeroTableName:
+    Type: String
+    Default: CM-Heroes
+  OfficeTableName:
+    Type: String
+    Default: CM-Offices
+  SponsorTableName:
+    Type: String
+    Default: CM-Sponsors
+  AccountId:
+    Type: String
+    Default: 99999999999
+  BucketName:
+    Type: String
+    Default: hero-lambda-deploy
+  CodeKey:
+    Type: String
+    Default: heroes/0000.zip
+  GetHeroesFunctionName:
+    Type: String
+    Default: heroes-get_heroes
+  PutHeroesFunctionName:
+    Type: String
+    Default: heroes-put_heroes
+  GetOfficesFunctionName:
+    Type: String
+    Default: heroes-get_offices
+  PutOfficesFunctionName:
+    Type: String
+    Default: heroes-put_offices
+  GetSponsorsFunctionName:
+    Type: String
+    Default: heroes-get_sponsores
+  PutSponsorsFunctionName:
+    Type: String
+    Default: heroes-put_sponsores
