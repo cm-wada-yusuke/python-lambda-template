@@ -1,34 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB) resource.
-Parameters:
-  Env:
-    Type: String
-    Default: local
-  DynamoDBEndpoint:
-    Type: String
-    Default: https://dynamodb.ap-northeast-1.amazonaws.com/
-  HeroTableName:
-    Type: String
-    Default: CM-Heroes
-  BucketName:
-    Type: String
-    Default: hero-lambda-deploy
-  CodeKey:
-    Type: String
-    Default: heroes/0000.zip
 Resources:
   GetHeroes:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName:
-        Fn::Sub: ${Env}-heroes-GetHeroes
-      Handler: src/functions/heroes/index.get
+        Fn::Sub: ${Env}-${GetHeroesFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
+      Handler: src/functions/handlers/heroes/index.get
       Runtime: python3.6
-      CodeUri:
-          Bucket: !Ref BucketName
-          Key: !Ref CodeKey
-      Policies: AmazonDynamoDBReadOnlyAccess
+      CodeUri: src/functions
       Environment:
         Variables:
           ENV: !Ref Env
@@ -39,13 +22,12 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName:
-        Fn::Sub: ${Env}-heroes-PutHeroes
+        Fn::Sub: ${Env}-${PutHeroesFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
       Handler: src/functions/heroes/index.put
       Runtime: python3.6
-      CodeUri:
-          Bucket: !Ref BucketName
-          Key: !Ref CodeKey
-      Policies: AmazonDynamoDBFullAccess
+      CodeUri: src/functions
       Environment:
         Variables:
           ENV: !Ref Env

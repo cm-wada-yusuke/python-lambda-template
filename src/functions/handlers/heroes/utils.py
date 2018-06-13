@@ -8,6 +8,7 @@ import json
 def epoc_by_second_precision(time: datetime):
     return decimal.Decimal(time.replace(microsecond=0).timestamp())
 
+
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, decimal.Decimal):

@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Simple CRUD webservice. State is stored in a SimpleTable (DynamoDB) resource.
+Resources:
+  GetSponsors:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: ${Env}-${GetSponsorsFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
+      Handler: src/functions/hadlers/sponsors/index.get
+      Runtime: python3.6
+      CodeUri: src/functions
+      Environment:
+        Variables:
+          ENV: !Ref Env
+          DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
+          SPONSOR_TABLE_NAME:
+            Fn::Sub: ${Env}-${SponsorTableName}
+  PutSponsors:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: ${Env}-${PutSponsorsFunctionName}
+      Role:
+        Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
+      Handler: src/functions/sponsors/index.put
+      Runtime: python3.6
+      CodeUri: src/functions
+      Environment:
+        Variables:
+          ENV: !Ref Env
+          DYNAMODB_ENDPOINT: !Ref DynamoDBEndpoint
+          SPONSOR_TABLE_NAME:
+            Fn::Sub: ${Env}-${SponsorTableName}
