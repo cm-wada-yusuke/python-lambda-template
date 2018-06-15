@@ -9,7 +9,7 @@ Resources:
         Fn::Sub: ${Env}-${GetOfficesFunctionName}
       Role:
         Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
-      Handler: src/functions/hadlers/offices/index.get
+      Handler: handlers/offices/index.get
       Runtime: python3.6
       CodeUri: src/functions
       Environment:
@@ -25,7 +25,7 @@ Resources:
         Fn::Sub: ${Env}-${PutOfficesFunctionName}
       Role:
         Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
-      Handler: src/functions/offices/index.put
+      Handler: handlers/offices/index.put
       Runtime: python3.6
       CodeUri: src/functions
       Environment:

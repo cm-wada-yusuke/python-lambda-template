@@ -9,7 +9,7 @@ Resources:
         Fn::Sub: ${Env}-${GetSponsorsFunctionName}
       Role:
         Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
-      Handler: src/functions/hadlers/sponsors/index.get
+      Handler: handlers/sponsors/index.get
       Runtime: python3.6
       CodeUri: src/functions
       Environment:
@@ -25,7 +25,7 @@ Resources:
         Fn::Sub: ${Env}-${PutSponsorsFunctionName}
       Role:
         Fn::Sub: arn:aws:iam::${AccountId}:role/${Env}-heroes-lambda
-      Handler: src/functions/sponsors/index.put
+      Handler: handlers/sponsors/index.put
       Runtime: python3.6
       CodeUri: src/functions
       Environment:

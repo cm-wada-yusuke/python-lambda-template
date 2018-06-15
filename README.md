@@ -25,50 +25,30 @@ Unit Test
 Using pytest.
 
 ```bash
-python -m pytest
-```
-
-Integration Test
----
-
-Using:
-
-* [AWS SAM Local] (https://github.com/awslabs/aws-sam-local)
-* [LocalStack (Docker)] (https://hub.docker.com/r/localstack/localstack/)
-* [Bats - Bash Automated Testing System] (https://github.com/sstephenson/bats)
-
-```Bash
-# Startup LocalStack
-docker-compose up-d
-
-# Execute SAM Local
-sam local invoke \
---docker-network a27c0476cb8e \
--t template_heroes.yaml \
---event test / functions / heroes / examples / get_payload.json \
-- env ​​- vars environments / sam - local.json GetHeroes
-```
-
-The test by Bats executes the above contents and compares the output.
-
-```Bash
-bats test / functions / heroes / integration.bats
+make test-unit
 ```
 
 Deploy
 ---
 
-Task:
+Using [AWS Serverless Application Model \(AWS SAM\)](https://github.com/awslabs/serverless-application-model).
 
-1. Zip sources and libraries.
-2. Upload to S3.
-3. Create Cloud Formation stack.
-4. CloudFormation Deploy.
+Your task:
 
-Before deploy, you should set your AccessKey for your AWS account.
+1. Edit `Makevars` for your environment.
+1. Create AWS SAM template in `templates/` directory.
+1. Create Lambda handler in `src/functions/handlers/` directory.  
+
+The name of the following `${resource_name}` has to be matched:
+
+* `templates/template_${resource_name}.yaml`
+* `src/functions/handlers/${resource_name}/example_handler.py`
+* Make task: `make deploy-${resource_name}`
+
+Before deploy, you should set your AccessKey and Secret for your AWS account. Deploy example: 
 
 ```bash
-./deploy.sh
+make deploy-heroes env=test account_id=9999999999999 
 ```
 
 CI / CD on AWS CodeBuild
@@ -77,7 +57,7 @@ CI / CD on AWS CodeBuild
 ### Create S3 bucket for deoloy.
 
 ```Bash
-aws s3 mb s3: // hero-lambda-deploy --profile your-profile
+aws s3 mb s3://hero-lambda-deploy --profile your-profile
 ```
 
 ### Create CodeBuild project and build.
