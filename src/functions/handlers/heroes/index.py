@@ -5,6 +5,7 @@ import datetime
 import uuid
 from builtins import Exception
 import os
+import time
 from core.utils import *
 
 DYNAMODB_ENDPOINT = os.getenv('DYNAMODB_ENDPOINT')
@@ -46,6 +47,7 @@ def put(event, context):
         name = event.get('name')
         office = event.get('office')
         sponsor = event.get('sponsor')
+        activity = event.get('activity')
         updated_at = epoc_by_second_precision(datetime.now())
 
         response = DYNAMODB_TABLE.put_item(
@@ -54,10 +56,12 @@ def put(event, context):
                 'name': name,
                 'office': office,
                 'sponsor': sponsor,
+                'activity': activity,
                 'updated_at': updated_at,
                 'created_at': updated_at,
             }
         )
+        time.sleep(1)
         return response
     except Exception as error:
         raise error
