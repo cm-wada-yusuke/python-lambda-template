@@ -15,7 +15,7 @@ Intellij Settings
 ---
 
 1. Project Structures> Python> Create your SDK with your Python
-2. Add SDK classpath: `/ paty / to / python / lib / python 3.6`
+2. Add SDK classpath: `/path/to/python/lib/python3.6`
 3. Project Structures> Modules> Attatch src and test directory as `Sources` and` Tests`
 4. install requirements.txt on Intellij
 
